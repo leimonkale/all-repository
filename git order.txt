@@ -1,0 +1,109 @@
+git help   //帮助手册
+
+git init   //初始化git仓库，当前文件夹
+
+git clone <远程仓库URL>   //下载远程仓库的完整内容（包括历史记录）
+
+git remote add origin <远程仓库URL>   //为本地仓库绑定远程仓库（通常别名用 origin）
+
+git remote -v  # 查看当前关联的远程仓库地址
+git remote set-url origin <新URL>  # 修改远程仓库地址
+git remote remove origin  # 删除远程仓库关联
+
+
+git status  # 详细状态（红色：未暂存；绿色：已暂存）
+git status -s  # 简洁状态（??：新文件；M：修改；D：删除）
+
+将文件添加到暂存区
+git add <文件名>  # 添加单个文件
+git add <文件夹名>/  # 添加整个文件夹
+git add .  # 添加当前目录所有未暂存的修改（新文件、修改、删除）
+git add -u  # 只添加已跟踪文件的修改/删除（不包括新文件）
+
+将已暂存的文件退回工作区：
+git reset HEAD <文件名>  # 单个文件
+git reset HEAD .  # 所有文件
+
+记录暂存区的修改，生成版本历史：
+git commit -m "提交信息"  # 提交并添加备注（必填，描述修改内容）
+git commit -am "提交信息"  # 跳过暂存区，直接提交已跟踪文件的修改（不包括新文件）
+
+补充修改到上一次提交（避免多一条无用历史）：
+git commit --amend  # 会打开编辑器修改提交信息，保存后覆盖上一次提交
+
+查看分支
+git branch  # 列出本地所有分支（当前分支前有 *）
+git branch -r  # 列出远程所有分支
+git branch -a  # 列出本地+远程所有分支
+
+创建分支
+git branch <分支名>  # 基于当前分支创建新分支（不切换）
+git checkout -b <分支名>  # 创建并立即切换到新分支（常用）
+git checkout -b <分支名> origin/<远程分支名>  # 基于远程分支创建本地分支
+
+切换分支
+git checkout <分支名>  # 切换到已有分支
+git switch <分支名>  # 新版 Git 支持，功能同 checkout（更直观）
+
+将目标分支的内容合并到当前分支：
+git merge <目标分支名>  
+git checkout -b hardware  //这个命令会创建一个新的 hardware 分支并自动切换到该分支。
+
+删除分支
+git branch -d <分支名>  # 删除本地分支（需先合并或确认放弃修改）
+git branch -D <分支名>  # 强制删除本地未合并的分支（慎用）
+git push origin --delete <远程分支名>  # 删除远程分支
+
+下载远程仓库的最新内容并合并到当前分支：
+git pull origin <远程分支名>  # 例：git pull origin main
+git pull  # 若已关联远程分支，可省略分支名
+
+将本地分支的提交推送到远程仓库：
+git push origin <本地分支名>  # 例：git push origin main
+git push -u origin <本地分支名>  # 首次推送时绑定本地与远程分支，后续可直接 git push
+
+查看远程分支与本地的关联
+git branch -vv  # 显示本地分支对应的远程分支
+
+查看提交历史
+git log  # 显示详细历史（按 q 退出）
+git log --oneline  # 简洁显示（一行一个提交，只显示哈希前缀和信息）
+git log --graph --oneline  # 图形化显示分支合并历史
+
+回退到指定版本
+git reset --hard <提交哈希值>  # 回退到指定版本（哈希值可通过 git log 查看前几位）
+git reset --hard HEAD~1  # 回退到上一个版本（~n 表示回退 n 个版本）
+
+将文件恢复到最近一次提交 / 暂存的状态（未暂存的修改会丢失）：
+git checkout -- <文件名>  # 单个文件
+git restore <文件名>  # 新版 Git 支持，功能同上
+
+查看已删除的文件或历史版本的文件
+git checkout <提交哈希值> -- <文件名>  # 从历史版本中恢复指定文件
+
+其他实用指令
+创建 .gitignore 文件，添加不需要 Git 跟踪的文件 / 文件夹（如日志、依赖包）：
+echo "node_modules/" >> .gitignore  # 忽略 node_modules 文件夹
+echo "*.log" >> .gitignore  # 忽略所有 .log 后缀的文件
+
+临时保存当前工作区的修改，切换分支时使用：
+git stash  # 暂存当前修改
+git stash pop  # 恢复最近一次暂存的修改并删除 stash 记录
+git stash list  # 查看所有 stash 记录
+
+比较两个分支的内容差异：
+git diff <分支1> <分支2>  # 显示两个分支的所有差异
+git diff <文件名>  # 显示工作区与暂存区的差异
+
+//////////////////////////////////////////////////////////////////////////////////////////////////ofent
+git remote add origin https://gitee.com/xxxx.git
+
+git push -u origin hardware    //-u 参数会将本地 hardware 分支与远程 hardware 分支关联起来，后续推送只需用 git push 即可。
+
+git add .   //提取所有文件到存储
+
+git pull origin hardware   //拉取、拷贝远程
+
+rm -rf .git  //取消监管
+
+git commit -m "说明具体内容"   //传递操作
