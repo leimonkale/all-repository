@@ -1,0 +1,19 @@
+# 定义编译器
+CC = gcc
+
+# 定义编译选项，开启常见警告和错误提示，提高代码健壮性
+CFLAGS = -Wall -Werror
+
+# 定义目标文件，这里假设你的函数实现文件是 socket_server.c 和 chat_ser.c
+SRCS = socket_client.c chat_client.c
+
+# 定义目标可执行文件名称
+TARGET = client
+
+# 生成目标可执行文件的规则
+$(TARGET): $(SRCS)
+	$(CC) $(CFLAGS) -o $(TARGET) $(SRCS) -pthread
+
+# 清理规则，用于删除生成的可执行文件和目标文件
+clean:
+	rm -f $(TARGET) *.o

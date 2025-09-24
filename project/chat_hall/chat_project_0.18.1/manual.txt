@@ -1,0 +1,9 @@
+halp:帮助手册
+sendfile/@file/@a:私发文件file给a,a是自己则存到云盘
+sendmessege/@message/@a:私发message给a
+vip/@money:支付money获取对应周期vip
+team/@teamnumber:加入number队伍
+sendteam/@message/@teamnumber:发送消息到队伍
+createteam/@teamnumber/@a:将a放入vip队伍，3,4,5号为vip队伍
+seefile:查看云盘文件
+[exit]:退出
