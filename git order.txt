@@ -107,3 +107,62 @@ git pull origin hardware   //拉取、拷贝远程
 rm -rf .git  //取消监管
 
 git commit -m "说明具体内容"   //传递操作
+
+ssh-keygen -t ed25519 -C "3597582398@qq.com" -f /d/my_ssh_keys/id_ed25519
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+一、确认目录结构
+确保 /d/ssh_key 目录已存在：
+bash
+ls -ld /d/ssh_key  # 若显示目录信息，说明创建成功
+二、生成密钥到 /d/ssh_key 目录
+bash
+ssh-keygen -t ed25519 -C "3597582398@qq.com" -f /d/ssh_key/id_ed25519
+生成后，/d/ssh_key 目录下会有：
+私钥：id_ed25519
+公钥：id_ed25519.pub
+三、在 /d/ssh_key 目录创建配置文件
+创建并编辑 config 文件：
+bash
+notepad /d/ssh_key/config  # 用记事本打开编辑
+写入以下内容（路径对应 /d/ssh_key）：
+config
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile /d/ssh_key/id_ed25519  # 私钥路径指向你的目录
+  UserKnownHostsFile /d/ssh_key/known_hosts  # 主机密钥文件路径
+四、设置权限（必须执行）
+bash
+chmod 700 /d/ssh_key  # 目录权限：仅所有者可读写执行
+chmod 600 /d/ssh_key/id_ed25519  # 私钥权限：仅所有者可读写
+chmod 600 /d/ssh_key/config  # 配置文件权限：仅所有者可读写
+touch /d/ssh_key/known_hosts  # 创建主机密钥文件（若不存在）
+chmod 600 /d/ssh_key/known_hosts  # 主机密钥文件权限
+五、测试连接
+bash
+ssh -F /d/ssh_key/config -T git@github.com
+首次连接提示 Are you sure... 时，输入 yes 并回车。
+成功提示：Hi 你的GitHub用户名! You've successfully authenticated...
+六、配置 Git 自动使用该路径
+bash
+git config --global core.sshCommand "ssh -F /d/ssh_key/config"
+此后使用 git push、git pull 等命令时，会自动使用 /d/ssh_key 目录下的配置和密钥。
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+具体操作步骤：
+复制完整的公钥内容执行命令后，选中并复制整行内容（包括 ssh-ed25519、中间的长字符串和结尾的邮箱）：
+bash
+cat /d/ssh_key/id_ed25519.pub
+# 输出：ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBCxQgL8v/1fv3ktCoZs4htOrl4PvJBqh4q9CYZLUSYk 3597582398@qq.com
+# 确保复制时没有遗漏、多余空格或换行
+在 GitHub 中添加公钥
+登录 GitHub → 点击右上角头像 → Settings → 左侧菜单选择 SSH and GPG keys。
+点击 New SSH key（绿色按钮）。
+在 Title 栏填写一个标识（如 “我的自定义密钥”，方便区分设备）。
+在 Key 文本框中粘贴刚才复制的完整公钥内容（确保和本地输出完全一致，不能修改任何字符）。
+点击 Add SSH key，可能需要输入 GitHub 密码验证。
+再次测试连接执行以下命令验证：
+bash
+ssh -F /d/ssh_key/config -T git@github.com
+若成功，会显示：
+Hi <你的GitHub用户名>! You've successfully authenticated, but GitHub does not provide shell access.
