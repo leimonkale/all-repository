@@ -465,13 +465,13 @@ ARM Macro Assembler    Page 8
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
 ork --depend=.\objects\startup_stm32f10x_md.d -o.\objects\startup_stm32f10x_md.
-o -ID:\LinuxShare\250502\Stm32\7_USART-nvic\RTE -ID:\LinuxShare\250502\Stm32\7_
-USART-nvic\RTE\Device\STM32F103C8 -ID:\WorkSpace\Keil\ARM\PACK\ARM\CMSIS\4.5.0\
-CMSIS\Include -ID:\WorkSpace\Keil\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Incl
-ude -ID:\WorkSpace\Keil\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\StdPeriph_Driv
-er\inc --predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 521"
- --predefine="_RTE_ SETA 1" --predefine="STM32F10X_MD SETA 1" --list=.\listings
-\startup_stm32f10x_md.lst RTE\Device\STM32F103C8\startup_stm32f10x_md.s
+o -ID:\File_all\STM\module\7_USART-nvic\RTE -ID:\File_all\STM\module\7_USART-nv
+ic\RTE\Device\STM32F103C8 -ID:\Keil\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include -ID:
+\Keil\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include -ID:\Keil\ARM\PACK\Keil\
+STM32F1xx_DFP\2.3.0\Device\StdPeriph_Driver\inc --predefine="__MICROLIB SETA 1"
+ --predefine="__UVISION_VERSION SETA 521" --predefine="_RTE_ SETA 1" --predefin
+e="STM32F10X_MD SETA 1" --list=.\listings\startup_stm32f10x_md.lst RTE\Device\S
+TM32F103C8\startup_stm32f10x_md.s
 
 
 
