@@ -166,3 +166,22 @@ bash
 ssh -F /d/ssh_key/config -T git@github.com
 若成功，会显示：
 Hi <你的GitHub用户名>! You've successfully authenticated, but GitHub does not provide shell access.
+
+///////////////////////////////////////////////////////////////////////////////////////////
+创建一个新文件夹并初始化 Git 仓库：
+bash
+mkdir my_project
+cd my_project
+git init
+将远程仓库添加为 origin：
+bash
+git remote add origin <仓库URL>
+启用稀疏检出功能：
+bash
+git config core.sparseCheckout true
+指定你需要的文件夹路径（将 <需要的文件夹路径> 替换为实际路径）：
+bash
+echo "<需要的文件夹路径>/" >> .git/info/sparse-checkout
+拉取远程仓库内容：
+bash
+git pull origin <分支名>
